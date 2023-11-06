@@ -1,15 +1,8 @@
-"""
-
-AUTOR: Juanjo
-
-FECHA DE CREACIÓN: 08/07/2019
-
-"""
 from .default import *
+import os
 
-
-SECRET_KEY = '5e04a4955d8878191923e86fe6a0dfb24edb226c87d6c7787f35ba4698afc86e95cae409aebd47f7'
+SECRET_KEY = os.getenv('SECRET_KEY_ENV')
 
 APP_ENV = APP_ENV_PRODUCTION
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://db_user:db_pass@host:port/db_name'
+SQLALCHEMY_DATABASE_URI = 'postgresql://'+ os.getenv('DB_USER') + ':' + os.getenv('DB_PASS') + '@' + os.getenv('DB_HOST') + ':5432/' + os.getenv('DB_NAME')

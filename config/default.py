@@ -1,13 +1,5 @@
-"""
-
-AUTOR: Juanjo
-
-FECHA DE CREACIÓN: 08/07/2019
-
-"""
-
 from os.path import abspath, dirname, join
-
+import os
 
 # Define the application directory
 BASE_DIR = dirname(dirname(abspath(__file__)))
@@ -30,12 +22,12 @@ APP_ENV_PRODUCTION = 'production'
 APP_ENV = ''
 
 # Configuración del email
-MAIL_SERVER = 'tu servidor smtp'
+MAIL_SERVER = os.getenv('MAIL_SERVER_ENV')
 MAIL_PORT = 587
-MAIL_USERNAME = 'tu correo'
-MAIL_PASSWORD = 'tu contraseña'
-DONT_REPLY_FROM_EMAIL = 'dirección from'
-ADMINS = ('juanjo@j2logo.com', )
+MAIL_USERNAME = os.getenv('MAIL_USERNAME_ENV')
+MAIL_PASSWORD = os.getenv('MAIL_PASSWORD_ENV')
+DONT_REPLY_FROM_EMAIL = 'damian@flask.com'
+ADMINS = ('damian@flask.com', )
 MAIL_USE_TLS = True
 MAIL_DEBUG = False
 
