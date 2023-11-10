@@ -43,6 +43,9 @@
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Salir</a>
                         </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('curso.index') }}">Cursos</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
