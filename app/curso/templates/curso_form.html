@@ -1,0 +1,44 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}
+    {% if form.especialidad.data %}
+        {{ form.especialidad.data }}
+    {% else %}
+        Nuevo Curso
+    {% endif %}
+{% endblock %}
+
+{% block curso %}
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.especialidad.label }}
+            {{ form.especialidad(size=256) }}<br>
+            {% for error in form.especialidad.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.content.label }}
+            {{ form.content }}<br>
+            {% for error in form.content.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.post_image.label }}
+            {{ form.post_image }}<br>
+            {% for error in form.post_image.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+    {% if post %}
+    <form action="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" method="post" novalidate>
+        <input type="submit" value="Eliminar" />
+    </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}{{ curso.especialidad }}{% endblock %}
+
+{% block curso %}
+    <h1>{{ curso.especialidad }}</h1>
+    <div>
+        <span class="blogDate">{{ curso.created|datetime('full') }}</span>
+    </div>
+    {% if curso.image_name %}
+        <div>
+            <img src="{{ url_for('media_posts', filename=curso.image_name) }}" />
+        </div>
+    {% endif %}
+    {{ curso.content }}
+{% endblock %}

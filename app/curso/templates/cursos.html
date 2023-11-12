@@ -1,7 +1,31 @@
-{% extends "base_template.html" %}
+{% extends "base_cursos.html" %}
 
 {% block title %}Cursos{% endblock %}
 
-{% block content %}
-    <h1>Listado de cursos</h1>
+{% block curso %}
+    <ul>
+    {% for curso in cursos_pagination.items %}
+        <li>
+            <a href="{{ url_for('curso.detalles_curso', id=curso.id) }}">
+                {{ curso.especialidad }} <span class="blogDate">({{ curso.created|datetime }})</span>
+            </a>
+        </li>
+    {% else %}
+        <li>No hay cursos</li>
+    {% endfor %}
+    </ul>
+
+    <div class=pagination>
+        {%- for page in cursos_pagination.iter_pages() %}
+            {% if page %}
+                {% if page != cursos_pagination.page %}
+                    <a href="{{ url_for('curso.index', page=page) }}">{{ page }}</a>
+                {% else %}
+                    <strong>{{ page }}</strong>
+                {% endif %}
+            {% else %}
+                <span class=ellipsis>…</span>
+            {% endif %}
+        {%- endfor %}
+    </div>
 {% endblock %}
