@@ -7,8 +7,14 @@ from app import db
 class Curso(db.Model):
     __tablename__ = 'curso'
     id = db.Column(db.Integer, primary_key=True)
+    numero = db.Column(db.String(5))
     especialidad = db.Column(db.String(256), nullable=False)
     content = db.Column(db.Text)
+    lunes = db.Column(db.String(20))
+    martes = db.Column(db.String(20))
+    miercoles = db.Column(db.String(20))
+    jueves = db.Column(db.String(20))
+    viernes = db.Column(db.String(20))
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     icon = db.Column(db.String)
     image_name = db.Column(db.String)
