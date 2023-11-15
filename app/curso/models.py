@@ -10,6 +10,7 @@ class Curso(db.Model):
     numero = db.Column(db.String(5))
     especialidad = db.Column(db.String(256), nullable=False)
     content = db.Column(db.Text)
+    turno = db.Column(db.String(15))
     lunes = db.Column(db.String(20))
     martes = db.Column(db.String(20))
     miercoles = db.Column(db.String(20))
@@ -57,6 +58,11 @@ class Curso(db.Model):
     @staticmethod
     def all_paginated(page=1, per_page=20):
         return Curso.query.order_by(Curso.created.asc()). \
+            paginate(page=page, per_page=per_page, error_out=False)
+    
+    @staticmethod
+    def turno_paginated(turno, page=1, per_page=20):
+        return Curso.query.filter_by(turno=turno).order_by(Curso.especialidad.asc()). \
             paginate(page=page, per_page=per_page, error_out=False)
 
     

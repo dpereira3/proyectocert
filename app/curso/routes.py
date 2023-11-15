@@ -33,6 +33,18 @@ def buscar_especialidad():
         abort(404)
     return render_template("cursos.html", cursos_pagination=especialidadbuscada)
 
+@curso_bp.route("/cursos/turno/<string:turno>/", methods=['GET'])
+def buscar_turno(turno):
+    logger.info('Mostrando un turno')
+    #query = request.args.get('especialidad', '') 
+    page = int(request.args.get('page', 1))
+    per_page = current_app.config['ITEMS_PER_PAGE']
+    turnobuscado = Curso.turno_paginated(turno, page, per_page)
+    if not turnobuscado:
+        logger.info(f'El turno {turno} no fue encontrado')
+        abort(404)
+    return render_template("cursos.html", cursos_pagination=turnobuscado)
+
 @curso_bp.route("/curso/<string:id>/", methods=['GET', 'POST'])
 def detalles_curso(id):
     logger.info('Mostrando un curso')
