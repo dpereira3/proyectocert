@@ -17,7 +17,7 @@ class Curso(db.Model):
     jueves = db.Column(db.String(20))
     viernes = db.Column(db.String(20))
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    icon = db.Column(db.String)
+    familia = db.Column(db.String(30))
     image_name = db.Column(db.String)
 
     def __repr__(self):

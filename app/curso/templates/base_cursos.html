@@ -9,7 +9,7 @@ Cursos
 {% endblock %}
 
 {% block content %}
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url_for('curso.index') }}">Cursos</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -18,6 +18,12 @@ Cursos
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=manana) }}">Mañana</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=tarde) }}">Tarde</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=vespertino) }}">Vespertino</a>
             </li>
         </ul>
       <form class="d-flex" role="search" method="get" action="{{ url_for('curso.buscar_especialidad') }}">

@@ -71,6 +71,7 @@ def curso_form():
         miercoles = form.miercoles.data
         jueves = form.jueves.data
         viernes = form.viernes.data
+        familia = form.familia.data
         file = form.post_image.data
         image_name = None
         # Comprueba si se ha subido un fichero

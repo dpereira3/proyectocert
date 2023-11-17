@@ -75,6 +75,13 @@
             {% endfor %}
         </div>
         <div>
+            {{ form.familia.label }}
+            {{ form.familia(size=30) }}<br>
+            {% for error in form.familia.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
             {{ form.post_image.label }}
             {{ form.post_image }}<br>
             {% for error in form.post_image.errors %}

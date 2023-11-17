@@ -17,6 +17,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.common.filters import format_datetime
 
+
 login_manager = LoginManager()
 db = SQLAlchemy()
 migrate = Migrate()
