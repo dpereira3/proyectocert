@@ -33,6 +33,13 @@
             {% endfor %}
         </div>
         <div>
+            {{ form.turno.label }}
+            {{ form.turno }}<br>
+            {% for error in form.turno.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
             {{ form.lunes.label }}
             {{ form.lunes(size=20) }}<br>
             {% for error in form.lunes.errors %}

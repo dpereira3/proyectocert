@@ -62,8 +62,15 @@ def curso_form():
     """Crea un nuevo curso"""
     form = CursoForm()
     if form.validate_on_submit():
+        numero = form.numero.data
         especialidad = form.especialidad.data
         content = form.content.data
+        turno = form.turno.data
+        lunes = form.lunes.data
+        martes = form.martes.data
+        miercoles = form.miercoles.data
+        jueves = form.jueves.data
+        viernes = form.viernes.data
         file = form.post_image.data
         image_name = None
         # Comprueba si se ha subido un fichero
@@ -73,7 +80,7 @@ def curso_form():
             os.makedirs(images_dir, exist_ok=True)
             file_path = os.path.join(images_dir, image_name)
             file.save(file_path)
-        curso = Curso(especialidad=especialidad, content=content)
+        curso = Curso(numero=numero, especialidad=especialidad, content=content, turno=turno, lunes=lunes, martes=martes, miercoles=miercoles,jueves=jueves, viernes=viernes)
         curso.image_name = image_name
         curso.save()
         logger.info(f'Guardando nuevo curso {especialidad}')
@@ -95,8 +102,15 @@ def update_curso_form(curso_id):
     form = CursoForm(obj=curso)
     if form.validate_on_submit():
         # Actualiza los campos del post existente
+        curso.numero = form.numero.data
         curso.especialidad = form.especialidad.data
         curso.content = form.content.data
+        curso.turno = form.turno.data
+        curso.lunes = form.lunes.data
+        curso.martes = form.martes.data
+        curso.miercoles = form.miercoles.data
+        curso.jueves = form.jueves.data
+        curso.viernes = form.viernes.data
         file = form.post_image.data
         # Comprueba si se ha subido un fichero
         if file:
@@ -112,7 +126,7 @@ def update_curso_form(curso_id):
     return render_template("curso_form.html", form=form, curso=curso)
 
 
-@curso_bp.route("/admin/curso/delete/<int:curso_id>/", methods=['POST', ])
+@curso_bp.route("/admin/curso/delete/<int:curso_id>/", methods=['POST'])
 @login_required
 @admin_required
 def delete_curso(curso_id):

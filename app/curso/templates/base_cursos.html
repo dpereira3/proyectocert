@@ -1,5 +1,9 @@
 {% extends "base_template.html" %}
 
+{% set manana = 'mañana' %}
+{% set tarde = 'tarde' %}
+{% set vespertino = 'verpertino' %}
+
 {% block title %}
 Cursos
 {% endblock %}
@@ -13,7 +17,7 @@ Cursos
               <a class="nav-link" href="{{ url_for('curso.curso_form') }}">Nuevo Curso</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('curso.buscar_turno, turno = ['Mañana']') }}">Mañana</a>
+              <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=manana) }}">Mañana</a>
             </li>
         </ul>
       <form class="d-flex" role="search" method="get" action="{{ url_for('curso.buscar_especialidad') }}">

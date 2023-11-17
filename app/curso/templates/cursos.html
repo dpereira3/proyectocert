@@ -7,8 +7,13 @@
     {% for curso in cursos_pagination.items %}
         <li>
             <a href="{{ url_for('curso.detalles_curso', id=curso.id) }}">
-                {{ curso.especialidad }} <span class="blogDate">({{ curso.created|datetime }})</span>
+             <b> {{ curso.numero }} </b> - {{ curso.especialidad }} 
             </a>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('curso.update_curso_form', curso_id=curso.id)}}">Modificar</a>
+            <span> | </span>
+            <a href="{{ url_for('curso.delete_curso', curso_id=curso.id)}}">Eliminar</a>
+            {% endif %}
         </li>
     {% else %}
         <li>No hay cursos</li>
