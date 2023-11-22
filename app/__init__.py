@@ -12,8 +12,9 @@ from logging.handlers import SMTPHandler
 from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
 
 from app.common.filters import format_datetime
 
@@ -56,7 +57,7 @@ def create_app(settings_module):
     from .public import public_bp
     app.register_blueprint(public_bp)
 
-    from .curso import curso_bp
+    from app.curso import curso_bp
     app.register_blueprint(curso_bp)
 
     # Custom error handlers

@@ -11,6 +11,7 @@ import os
 from flask import send_from_directory
 
 from app import create_app
+from app import db
 
 
 settings_module = os.getenv('APP_SETTINGS_MODULE')
