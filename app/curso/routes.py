@@ -126,7 +126,7 @@ def update_curso_form(curso_id):
     return render_template("curso_form.html", form=form, curso=curso)
 
 
-@curso_bp.route("/admin/curso/delete/<int:curso_id>/", methods=['POST'])
+@curso_bp.route("/admin/curso/delete/<int:curso_id>/", methods=['POST', ])
 @login_required
 @admin_required
 def delete_curso(curso_id):

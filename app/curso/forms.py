@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import (StringField, SubmitField, TextAreaField, BooleanField, RadioField)
+from wtforms import (StringField, SubmitField, TextAreaField, BooleanField, RadioField, IntegerField)
 from wtforms.validators import DataRequired, Length
 
 
@@ -23,7 +23,7 @@ class EspecialidadForm(FlaskForm):
     familia = StringField('Familia Profesional', validators=[Length(max=20)])
     codigo = StringField('Codigo', validators=[DataRequired(), Length(max=5)])
     nombre = StringField('Especialidad', validators=[DataRequired(), Length(max=256)])
-    nivel = RadioField('Nivel de Estudios', choices=[('mañana','Mañana'),('tarde','Tarde'),('vespertino','Vespertino')])
+    nivel = RadioField('Nivel de Estudios', choices=[('nivel 1','Nivel I'),('nivel 2','Nivel II'),('nivel 3','Nivel III')])
     cert = StringField('Certificación', validators=[Length(max=20)])
     resolucion = StringField('Resolución', validators=[Length(max=20)])
     hcat = StringField('Horas Catedra', validators=[Length(max=20)])
@@ -31,3 +31,10 @@ class EspecialidadForm(FlaskForm):
     requisitos = StringField('Requisitos', validators=[Length(max=20)])
     diseno = StringField('Diseño Curricular', validators=[Length(max=20)])
     reemplaza = TextAreaField('Reemplaza a...')
+
+class ModuloForm(FlaskForm):
+    codigo = StringField('Codigo', validators=[DataRequired(), Length(max=5)])
+    nombre = StringField('Especialidad', validators=[DataRequired(), Length(max=256)])
+    hcat = StringField('Horas Catedra', validators=[Length(max=20)])
+    hreloj = StringField('Horas Reloj', validators=[Length(max=20)])
+    especialidad = IntegerField('Especialidad')
