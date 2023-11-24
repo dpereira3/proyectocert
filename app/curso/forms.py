@@ -26,11 +26,12 @@ class EspecialidadForm(FlaskForm):
     nivel = RadioField('Nivel de Estudios', choices=[('nivel 1','Nivel I'),('nivel 2','Nivel II'),('nivel 3','Nivel III')])
     cert = StringField('Certificación', validators=[Length(max=20)])
     resolucion = StringField('Resolución', validators=[Length(max=20)])
-    hcat = StringField('Horas Catedra', validators=[Length(max=20)])
-    hreloj = StringField('Horas Reloj', validators=[Length(max=20)])
-    requisitos = StringField('Requisitos', validators=[Length(max=20)])
+    hcat = StringField('Horas Catedra', validators=[Length(max=4)])
+    hreloj = StringField('Horas Reloj', validators=[Length(max=4)])
+    requisitos = StringField('Requisitos', validators=[Length(max=128)])
     diseno = StringField('Diseño Curricular', validators=[Length(max=20)])
     reemplaza = TextAreaField('Reemplaza a...')
+    submit = SubmitField('Guardar')
 
 class ModuloForm(FlaskForm):
     codigo = StringField('Codigo', validators=[DataRequired(), Length(max=5)])
@@ -38,3 +39,4 @@ class ModuloForm(FlaskForm):
     hcat = StringField('Horas Catedra', validators=[Length(max=20)])
     hreloj = StringField('Horas Reloj', validators=[Length(max=20)])
     especialidad = IntegerField('Especialidad')
+    submit = SubmitField('Guardar')

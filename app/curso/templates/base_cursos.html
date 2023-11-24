@@ -25,6 +25,12 @@ Cursos
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=vespertino) }}">Vespertino</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.especialidades') }}">Especialidades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.especialidad_form') }}">Nueva Especialidad</a>
+            </li>
         </ul>
       <form class="d-flex" role="search" method="get" action="{{ url_for('curso.buscar_especialidad') }}">
         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="especialidad">

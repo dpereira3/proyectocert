@@ -150,7 +150,7 @@ def especialidades():
     page = int(request.args.get('page', 1))
     per_page = current_app.config['ITEMS_PER_PAGE']
     especialidad_pagination = Especialidad.all_paginated(page, per_page)
-    return render_template("especialidades.html", cursos_pagination=especialidad_pagination)
+    return render_template("especialidades.html", especialidad_pagination=especialidad_pagination)
 
 @curso_bp.route("/especialidad/familia/<string:familia>", methods=['GET', 'POST'])
 def buscar_familia():
@@ -181,21 +181,23 @@ def especialidad_form():
     """Crea un nueva especialidad"""
     form = EspecialidadForm()
     if form.validate_on_submit():
-        numero = form.numero.data
-        especialidad = form.especialidad.data
-        content = form.content.data
-        turno = form.turno.data
-        lunes = form.lunes.data
-        martes = form.martes.data
-        miercoles = form.miercoles.data
-        jueves = form.jueves.data
-        viernes = form.viernes.data
+        familia = form.familia.data
+        codigo = form.codigo.data
+        nombre = form.nombre.data
+        nivel = form.nivel.data
+        cert = form.cert.data
+        resolucion = form.resolucion.data
+        hcat = form.hcat.data
+        hreloj = form.hreloj.data
+        requisitos = form.requisitos.data
+        diseno = form.diseno.data
+        reemplaza = form.reemplaza.data
 
-        especialidad = Especialidad(numero=numero, especialidad=especialidad, content=content, turno=turno, lunes=lunes, martes=martes, miercoles=miercoles,jueves=jueves, viernes=viernes)
+        especialidad = Especialidad(familia=familia, codigo=codigo, nombre=nombre, nivel=nivel, cert=cert, resolucion=resolucion, hcat=hcat, hreloj=hreloj, requisitos=requisitos, diseno=diseno, reemplaza=reemplaza)
        
         especialidad.save()
         logger.info(f'Guardando nueva especialidad {especialidad}')
-        return redirect(url_for('especialidad.index'))
+        return redirect(url_for('curso.especialidades'))
     return render_template("especialidad_form.html", form=form)
 
 

@@ -1,10 +1,10 @@
 {% extends "base_cursos.html" %}
 
 {% block title %}
-    {% if form.especialidad.data %}
-        {{ form.especialidad.data }}
+    {% if form.nombre.data %}
+        {{ form.nombre.data }}
     {% else %}
-        Nuevo Curso
+        Nueva Especialidad
     {% endif %}
 {% endblock %}
 
@@ -12,72 +12,79 @@
     <form action="" method="post" enctype="multipart/form-data" novalidate>
         {{ form.hidden_tag() }}
         <div>
-            {{ form.numero.label }}
-            {{ form.numero(size=5) }}<br>
-            {% for error in form.numero.errors %}
+            {{ form.familia.label }}
+            {{ form.familia }}<br>
+            {% for error in form.familia.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.especialidad.label }}
-            {{ form.especialidad(size=256) }}<br>
-            {% for error in form.especialidad.errors %}
+            {{ form.codigo.label }}
+            {{ form.codigo }}<br>
+            {% for error in form.codigo.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.content.label }}
-            {{ form.content }}<br>
-            {% for error in form.content.errors %}
+            {{ form.nombre.label }}
+            {{ form.nombre }}<br>
+            {% for error in form.nombre.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.turno.label }}
-            {{ form.turno }}<br>
-            {% for error in form.turno.errors %}
+            {{ form.nivel.label }}
+            {{ form.nivel }}<br>
+            {% for error in form.nivel.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.lunes.label }}
-            {{ form.lunes(size=20) }}<br>
-            {% for error in form.lunes.errors %}
+            {{ form.cert.label }}
+            {{ form.cert }}<br>
+            {% for error in form.cert.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.martes.label }}
-            {{ form.martes(size=20) }}<br>
-            {% for error in form.martes.errors %}
+            {{ form.resolucion.label }}
+            {{ form.resolucion }}<br>
+            {% for error in form.resolucion.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.miercoles.label }}
-            {{ form.miercoles(size=20) }}<br>
-            {% for error in form.miercoles.errors %}
+            {{ form.hcat.label }}
+            {{ form.hcat }}<br>
+            {% for error in form.hcat.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.jueves.label }}
-            {{ form.jueves(size=20) }}<br>
-            {% for error in form.jueves.errors %}
+            {{ form.hreloj.label }}
+            {{ form.hreloj }}<br>
+            {% for error in form.hreloj.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.viernes.label }}
-            {{ form.viernes(size=20) }}<br>
-            {% for error in form.viernes.errors %}
+            {{ form.requisitos.label }}
+            {{ form.requisitos }}<br>
+            {% for error in form.requisitos.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.post_image.label }}
-            {{ form.post_image }}<br>
-            {% for error in form.post_image.errors %}
+            {{ form.diseno.label }}
+            {{ form.diseno }}<br>
+            {% for error in form.diseno.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.reemplaza.label }}
+            {{ form.reemplaza }}<br>
+            {% for error in form.reemplaza.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
@@ -86,7 +93,7 @@
         </div>
     </form>
     {% if post %}
-    <form action="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" method="post" novalidate>
+    <form action="{{ url_for('curso.delete_especialidad', especialidad_id=especialidad.id) }}" method="post" novalidate>
         <input type="submit" value="Eliminar" />
     </form>
     {% endif %}
