@@ -1,12 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import (StringField, SubmitField, TextAreaField, BooleanField, RadioField, IntegerField)
+from wtforms import (StringField, SubmitField, TextAreaField, BooleanField, RadioField, IntegerField, SelectField)
 from wtforms.validators import DataRequired, Length
 
 
 class CursoForm(FlaskForm):
     numero = StringField('Numero', validators=[DataRequired(), Length(max=5)])
-    especialidad = StringField('Especialidad', validators=[DataRequired(), Length(max=256)])
+    especialidad = SelectField(u'Especialidad', coerce=int)
     content = TextAreaField('Descripción')
     turno = RadioField('Turno', choices=[('mañana','Mañana'),('tarde','Tarde'),('vespertino','Vespertino')])
     lunes = StringField('Lunes', validators=[Length(max=20)])

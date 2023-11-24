@@ -76,12 +76,13 @@ class Especialidad(db.Model):
     hcat = db.Column(db.String(4))
     hreloj = db.Column(db.String(4))
     requisitos = db.Column(db.String(128))
-    modulos = db.relationship('Modulo', backref='especialidad', lazy=True, cascade='all, delete-orphan',
+    modulos = db.relationship('Modulo', backref='especialidad_modulo', lazy=True, cascade='all, delete-orphan',
                                order_by='asc(Modulo.codigo)')
     diseno = db.Column(db.String(20))
     reemplaza = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    cursos = db.relationship('Curso', backref='especialidad_curso')
+    cursos = db.relationship('Curso', backref='especialidad_curso', lazy=True, cascade='all, delete-orphan',
+                               order_by='asc(Curso.numero)')
 
     def __repr__(self):
         return f'<Especialidad {self.nombre}>'

@@ -1,18 +1,18 @@
 {% extends "base_cursos.html" %}
 
-{% block title %}Cursos{% endblock %}
+{% block title %}Especialidades{% endblock %}
 
 {% block curso %}
     <ul>
-    {% for curso in cursos_pagination.items %}
+    {% for especialidad in cursos_pagination.items %}
         <li>
-            <a href="{{ url_for('curso.detalles_curso', id=curso.id) }}">
-             <b> {{ curso.numero }} </b> - {{ curso.especialidad_curso.nombre }} 
+            <a href="{{ url_for('especialidad.detalles_especialidad', id=especialidad.id) }}">
+             <b> {{ especialidad.numero }} </b> - {{ especialidad.especialidad_curso.nombre }} 
             </a>
             {% if current_user.is_admin %}
-            <a href="{{ url_for('curso.update_curso_form', curso_id=curso.id)}}">Modificar</a>
+            <a href="{{ url_for('especialidad.update_especialidad_form', especialidad_id=especialidad.id)}}">Modificar</a>
             <span> | </span>
-            <form action="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" method="post" novalidate>
+            <form action="{{ url_for('especialidad.delete_especialidad', especialidad_id=especialidad.id) }}" method="post" novalidate>
                 <input type="submit" value="Eliminar" />
             </form>
             {% endif %}
@@ -26,7 +26,7 @@
         {%- for page in cursos_pagination.iter_pages() %}
             {% if page %}
                 {% if page != cursos_pagination.page %}
-                    <a href="{{ url_for('curso.index', page=page) }}">{{ page }}</a>
+                    <a href="{{ url_for('especialidad.index', page=page) }}">{{ page }}</a>
                 {% else %}
                     <strong>{{ page }}</strong>
                 {% endif %}

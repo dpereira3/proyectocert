@@ -20,7 +20,7 @@
         </div>
         <div>
             {{ form.especialidad.label }}
-            {{ form.especialidad(size=256) }}<br>
+            {{ form.especialidad }}<br>
             {% for error in form.especialidad.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
