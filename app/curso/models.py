@@ -67,18 +67,18 @@ class Curso(db.Model):
 class Especialidad(db.Model):
     __tablename__ = 'especialidad'
     id = db.Column(db.Integer, primary_key=True)
-    familia = db.Column(db.String(20))
+    familia = db.Column(db.String(40))
     codigo = db.Column(db.String(5))
     nombre = db.Column(db.String(256), nullable=False)
-    nivel = db.Column(db.String(20))
+    nivel = db.Column(db.String(10))
     cert = db.Column(db.String(256), nullable=False)
-    resolucion = db.Column(db.String(20))
+    resolucion = db.Column(db.String(40))
     hcat = db.Column(db.String(4))
     hreloj = db.Column(db.String(4))
     requisitos = db.Column(db.String(128))
     modulos = db.relationship('Modulo', backref='especialidad_modulo', lazy=True, cascade='all, delete-orphan',
                                order_by='asc(Modulo.codigo)')
-    diseno = db.Column(db.String(20))
+    diseno = db.Column(db.String(40))
     reemplaza = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     cursos = db.relationship('Curso', backref='especialidad_curso', lazy=True, cascade='all, delete-orphan',
@@ -121,7 +121,7 @@ class Especialidad(db.Model):
 
     @staticmethod
     def all_paginated(page=1, per_page=20):
-        return Especialidad.query.order_by(Especialidad.created.asc()). \
+        return Especialidad.query.order_by(Especialidad.codigo.asc()). \
             paginate(page=page, per_page=per_page, error_out=False)
     
     

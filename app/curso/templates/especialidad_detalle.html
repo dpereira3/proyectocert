@@ -1,0 +1,11 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}{{ especialidad.nombre }}{% endblock %}
+
+{% block curso %}
+    <h1>{{ especialidad.nombre }}</h1>
+    <div>
+        <span class="blogDate">{{ especialidad.created|datetime('full') }}</span>
+    </div>
+    {{ especialidad.codigo }}
+{% endblock %}

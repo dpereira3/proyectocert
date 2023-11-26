@@ -20,16 +20,16 @@ class CursoForm(FlaskForm):
     submit = SubmitField('Guardar')
 
 class EspecialidadForm(FlaskForm):
-    familia = StringField('Familia Profesional', validators=[Length(max=20)])
+    familia = StringField('Familia Profesional', validators=[Length(max=40)])
     codigo = StringField('Codigo', validators=[DataRequired(), Length(max=5)])
     nombre = StringField('Especialidad', validators=[DataRequired(), Length(max=256)])
-    nivel = RadioField('Nivel de Estudios', choices=[('nivel 1','Nivel I'),('nivel 2','Nivel II'),('nivel 3','Nivel III')])
-    cert = StringField('Certificación', validators=[Length(max=20)])
-    resolucion = StringField('Resolución', validators=[Length(max=20)])
+    nivel = RadioField('Nivel de Estudios', choices=[('nivel 1','Nivel I'),('nivel 2','Nivel II'),('nivel 3','Nivel III'),('sin nivel','Sin Nivel')])
+    cert = StringField('Certificación', validators=[Length(max=256)])
+    resolucion = StringField('Resolución', validators=[Length(max=40)])
     hcat = StringField('Horas Catedra', validators=[Length(max=4)])
     hreloj = StringField('Horas Reloj', validators=[Length(max=4)])
     requisitos = StringField('Requisitos', validators=[Length(max=128)])
-    diseno = StringField('Diseño Curricular', validators=[Length(max=20)])
+    diseno = StringField('Diseño Curricular', validators=[Length(max=40)])
     reemplaza = TextAreaField('Reemplaza a...')
     submit = SubmitField('Guardar')
 

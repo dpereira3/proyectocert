@@ -12,9 +12,7 @@
             {% if current_user.is_admin %}
             <a href="{{ url_for('curso.update_especialidad_form', especialidad_id=especialidad.id)}}">Modificar</a>
             <span> | </span>
-            <form action="{{ url_for('curso.delete_especialidad', especialidad_id=especialidad.id) }}" method="post" novalidate>
-                <input type="submit" value="Eliminar" />
-            </form>
+            <a href="{{ url_for('curso.delete_especialidad', especialidad_id=especialidad.id) }}" >Eliminar</a>
             {% endif %}
         </li>
     {% else %}
@@ -26,7 +24,7 @@
         {%- for page in especialidad_pagination.iter_pages() %}
             {% if page %}
                 {% if page != especialidad_pagination.page %}
-                    <a href="{{ url_for('especialidad.especialidades', page=page) }}">{{ page }}</a>
+                    <a href="{{ url_for('curso.especialidades', page=page) }}">{{ page }}</a>
                 {% else %}
                     <strong>{{ page }}</strong>
                 {% endif %}

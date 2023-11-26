@@ -1,5 +1,6 @@
 import logging
 import os
+import datetime
 
 from flask import abort, render_template, redirect, url_for, request, current_app
 from flask_login import login_required, current_user
@@ -8,7 +9,7 @@ from werkzeug.utils import secure_filename
 from app.auth.decorators import admin_required
 from app.auth.models import User
 from . import curso_bp
-from .forms import CursoForm, EspecialidadForm  
+from .forms import CursoForm, EspecialidadForm, ModuloForm  
 from .models import Curso, Especialidad, Modulo
 
 logger = logging.getLogger(__name__)
@@ -129,7 +130,7 @@ def update_curso_form(curso_id):
     return render_template("curso_form.html", form=form, curso=curso)
 
 
-@curso_bp.route("/admin/curso/delete/<int:curso_id>/", methods=['POST', ])
+@curso_bp.route("/admin/curso/delete/<int:curso_id>/", methods=['POST', 'GET'])
 @login_required
 @admin_required
 def delete_curso(curso_id):
@@ -215,23 +216,26 @@ def update_especialidad_form(especialidad_id):
     form = EspecialidadForm(obj=especialidad)
     if form.validate_on_submit():
         # Actualiza los campos del post existente
-        especialidad.numero = form.numero.data
-        especialidad.especialidad = form.especialidad.data
-        especialidad.content = form.content.data
-        especialidad.turno = form.turno.data
-        especialidad.lunes = form.lunes.data
-        especialidad.martes = form.martes.data
-        especialidad.miercoles = form.miercoles.data
-        especialidad.jueves = form.jueves.data
-        especialidad.viernes = form.viernes.data
-        
+        especialidad.familia = form.familia.data
+        especialidad.codigo = form.codigo.data
+        especialidad.nombre = form.nombre.data
+        especialidad.nivel = form.nivel.data
+        especialidad.cert = form.cert.data
+        especialidad.resolucion = form.resolucion.data
+        especialidad.hcat = form.hcat.data
+        especialidad.hreloj = form.hreloj.data
+        especialidad.requisitos = form.requisitos.data
+        especialidad.diseno = form.diseno.data
+        especialidad.reemplaza = form.reemplaza.data
+        especialidad.created = datetime.datetime.utcnow()
+
         especialidad.save()
         logger.info(f'Guardando la especialidad {especialidad_id}')
-        return redirect(url_for('especialidad.index'))
+        return redirect(url_for('curso.especialidades'))
     return render_template("especialidad_form.html", form=form, especialidad=especialidad)
 
 
-@curso_bp.route("/admin/especialidad/delete/<int:especialidad_id>/", methods=['POST', ])
+@curso_bp.route("/admin/especialidad/delete/<int:especialidad_id>/", methods=['POST', 'GET'])
 @login_required
 @admin_required
 def delete_especialidad(especialidad_id):
@@ -242,4 +246,109 @@ def delete_especialidad(especialidad_id):
         abort(404)
     especialidad.delete()
     logger.info(f'La especialidad {especialidad_id} ha sido eliminado')
-    return redirect(url_for('especialidad.index'))
+    return redirect(url_for('curso.especialidades'))
+
+"""    MODULOS    """
+
+@curso_bp.route("/modulos")
+def modulos():
+    logger.info('Mostrando los modulos')
+    page = int(request.args.get('page', 1))
+    per_page = current_app.config['ITEMS_PER_PAGE']
+    modulo_pagination = Modulo.all_paginated(page, per_page)
+    return render_template("modulos.html", modulo_pagination=modulo_pagination)
+
+@curso_bp.route("/modulos/nombre/<string:nombre>", methods=['GET', 'POST'])
+def buscar_nombre():
+    logger.info('Mostrando un nombre')
+    query = request.args.get('nombre', '') 
+    page = int(request.args.get('page', 1))
+    per_page = current_app.config['ITEMS_PER_PAGE']
+    nombrebuscado = Modulo.get_by_nombre(query, page, per_page)
+    if not nombrebuscado:
+        logger.info(f'El nombre {query} no fue encontrado')
+        abort(404)
+    return render_template("modulos.html", cursos_pagination=nombrebuscado)
+
+@curso_bp.route("/modulo/<string:id>/", methods=['GET', 'POST'])
+def detalles_modulo(id):
+    logger.info('Mostrando un modulo')
+    logger.debug(f'Id: {id}')
+    modulo = Modulo.get_by_id(id)
+    if not modulo:
+        logger.info(f'El modulo {id} no existe')
+        abort(404)
+    return render_template("modulo_detalle.html", modulo=modulo)
+
+@curso_bp.route("/admin/modulo/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def modulo_form():
+    """Crea un nuevo modulo"""
+    form = ModuloForm()
+    if form.validate_on_submit():
+        familia = form.familia.data
+        codigo = form.codigo.data
+        nombre = form.nombre.data
+        nivel = form.nivel.data
+        cert = form.cert.data
+        resolucion = form.resolucion.data
+        hcat = form.hcat.data
+        hreloj = form.hreloj.data
+        requisitos = form.requisitos.data
+        diseno = form.diseno.data
+        reemplaza = form.reemplaza.data
+
+        modulo = Modulo(familia=familia, codigo=codigo, nombre=nombre, nivel=nivel, cert=cert, resolucion=resolucion, hcat=hcat, hreloj=hreloj, requisitos=requisitos, diseno=diseno, reemplaza=reemplaza)
+       
+        modulo.save()
+        logger.info(f'Guardando nuevo modulo {modulo}')
+        return redirect(url_for('curso.especialidades'))
+    return render_template("modulo_form.html", form=form)
+
+
+@curso_bp.route("/admin/modulo/<int:modulo_id>/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def update_modulo_form(modulo_id):
+    """Actualiza un modulo existente"""
+    modulo = Modulo.get_by_id(modulo_id)
+    if modulo is None:
+        logger.info(f'El modulo {modulo_id} no existe')
+        abort(404)
+    # Crea un formulario inicializando los campos con
+    # los valores del post.
+    form = ModuloForm(obj=modulo)
+    if form.validate_on_submit():
+        # Actualiza los campos del post existente
+        modulo.familia = form.familia.data
+        modulo.codigo = form.codigo.data
+        modulo.nombre = form.nombre.data
+        modulo.nivel = form.nivel.data
+        modulo.cert = form.cert.data
+        modulo.resolucion = form.resolucion.data
+        modulo.hcat = form.hcat.data
+        modulo.hreloj = form.hreloj.data
+        modulo.requisitos = form.requisitos.data
+        modulo.diseno = form.diseno.data
+        modulo.reemplaza = form.reemplaza.data
+        modulo.created = datetime.datetime.utcnow()
+
+        modulo.save()
+        logger.info(f'Guardando el modulo {modulo_id}')
+        return redirect(url_for('curso.especialidades'))
+    return render_template("modulo_form.html", form=form, modulo=modulo)
+
+
+@curso_bp.route("/admin/modulo/delete/<int:modulo_id>/", methods=['POST', 'GET'])
+@login_required
+@admin_required
+def delete_modulo(modulo_id):
+    logger.info(f'Se va a eliminar el modulo {modulo_id}')
+    modulo = Modulo.get_by_id(modulo_id)
+    if modulo is None:
+        logger.info(f'El modulo {modulo_id} no existe')
+        abort(404)
+    modulo.delete()
+    logger.info(f'El modulo {modulo_id} ha sido eliminado')
+    return redirect(url_for('curso.especialidades'))

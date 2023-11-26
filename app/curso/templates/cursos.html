@@ -12,9 +12,7 @@
             {% if current_user.is_admin %}
             <a href="{{ url_for('curso.update_curso_form', curso_id=curso.id)}}">Modificar</a>
             <span> | </span>
-            <form action="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" method="post" novalidate>
-                <input type="submit" value="Eliminar" />
-            </form>
+            <a href="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" >Eliminar</a>
             {% endif %}
         </li>
     {% else %}
