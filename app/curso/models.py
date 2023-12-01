@@ -169,3 +169,7 @@ class Modulo(db.Model):
     def all_paginated(page=1, per_page=20):
         return Modulo.query.order_by(Modulo.created.asc()). \
             paginate(page=page, per_page=per_page, error_out=False)
+    
+    @staticmethod
+    def get_by_especialidad(especialidad_id):
+        return Modulo.query.filter_by(especialidad_id=especialidad_id).order_by(Modulo.codigo.asc())

@@ -7,5 +7,28 @@
     <div>
         <span class="blogDate">{{ especialidad.created|datetime('full') }}</span>
     </div>
-    {{ especialidad.codigo }}
+    <p>Codigo: {{ especialidad.codigo }} </p>
+
+    <p>Resolucion: {{ especialidad.resolucion}} </p>
+    <br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Horas Catedra</th>
+            <th scope="col">Horas Reloj</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for modulo in modulos %}
+            <tr>
+                <th scope="row"> {{ modulo.codigo }} </th>
+                    <td> {{ modulo.nombre }} </td>
+                    <td> {{ modulo.hcat }} </td>
+                    <td> {{ modulo.hreloj }} </td>
+            </tr>  
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -170,10 +170,11 @@ def detalles_especialidad(id):
     logger.info('Mostrando una especialidad')
     logger.debug(f'Id: {id}')
     especialidad = Especialidad.get_by_id(id)
+    modulos = Modulo.get_by_especialidad(id)
     if not especialidad:
         logger.info(f'La especialidad {id} no existe')
         abort(404)
-    return render_template("especialidad_detalle.html", especialidad=especialidad)
+    return render_template("especialidad_detalle.html", especialidad=especialidad, modulos=modulos)
 
 @curso_bp.route("/admin/especialidad/", methods=['GET', 'POST'])
 @login_required
