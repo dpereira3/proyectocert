@@ -1,0 +1,61 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}{{ especialidad.nombre }}{% endblock %}
+
+{% block curso %}
+    <h1>{{ especialidad.nombre }}</h1>
+    <div>
+        <span class="blogDate">{{ especialidad.created|datetime('full') }}</span>
+    </div>
+    <p>Codigo: {{ especialidad.codigo }} </p>
+
+    <p>Resolucion: {{ especialidad.resolucion}} </p>
+    <br>
+    <h3>Modulos de la especialidad: </h3>
+    
+        {% for modulo in modulos %}
+        <form class="row row-cols-lg-auto g-3 align-items-center" action="" method="post" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.especialidad(value=modulo.especialidad_id) }}
+            
+                <div class="col-2">
+                    {{ form.codigo.label }}
+                    {{ form.codigo(value=modulo.codigo) }}<br>
+                    {% for error in form.codigo.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-6">
+                    {{ form.nombre.label }}
+                    {{ form.nombre(value=modulo.nombre) }}<br>
+                    {% for error in form.nombre.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-1">
+                    {{ form.hcat.label }}
+                    {{ form.hcat(value=modulo.hcat) }}<br>
+                    {% for error in form.hcat.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-1">
+                    {{ form.hreloj.label }}
+                    {{ form.hreloj(value=modulo.hreloj) }}<br>
+                    {% for error in form.hreloj.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-1">
+                    {{ form.submit() }}
+                </div>
+            </form>
+            {% if modulo %}
+            <div class="col-1">
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="{{ url_for('curso.delete_modulo', modulo_id=modulo.id, especialidad_id=especialidad.id) }}" method="post" novalidate>
+                    <input type="submit" value="Eliminar" />
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+{% endblock %}

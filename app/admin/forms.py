@@ -18,9 +18,9 @@ class PostForm(FlaskForm):
     post_image = FileField('Imagen de cabecera', validators=[
         FileAllowed(['jpg', 'png'], 'Solo se permiten imágenes')
     ])
-    submit = SubmitField('Guardar')
+    submit = SubmitField('Guardar', render_kw={"class":"btn btn-primary"})
 
 
 class UserAdminForm(FlaskForm):
     is_admin = BooleanField('Administrador')
-    submit = SubmitField('Guardar')
+    submit = SubmitField('Guardar', render_kw={"class":"btn btn-primary"})

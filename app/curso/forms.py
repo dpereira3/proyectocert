@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import (StringField, SubmitField, TextAreaField, BooleanField, RadioField, IntegerField, SelectField)
+from wtforms import (StringField, SubmitField, TextAreaField, BooleanField, RadioField, IntegerField, SelectField, HiddenField)
 from wtforms.validators import DataRequired, Length
 
 
@@ -17,7 +17,7 @@ class CursoForm(FlaskForm):
     post_image = FileField('Imagen de cabecera', validators=[
         FileAllowed(['jpg', 'png'], 'Solo se permiten imágenes')
     ])
-    submit = SubmitField('Guardar')
+    submit = SubmitField('Guardar', render_kw={"class":"btn btn-primary"})
 
 class EspecialidadForm(FlaskForm):
     familia = StringField('Familia Profesional', validators=[Length(max=40)])
@@ -31,12 +31,12 @@ class EspecialidadForm(FlaskForm):
     requisitos = StringField('Requisitos', validators=[Length(max=128)])
     diseno = StringField('Diseño Curricular', validators=[Length(max=40)])
     reemplaza = TextAreaField('Reemplaza a...')
-    submit = SubmitField('Guardar')
+    submit = SubmitField('Guardar', render_kw={"class":"btn btn-primary"})
 
 class ModuloForm(FlaskForm):
-    codigo = StringField('Codigo', validators=[DataRequired(), Length(max=5)])
+    codigo = StringField('Codigo', validators=[DataRequired(), Length(max=10)])
     nombre = StringField('Especialidad', validators=[DataRequired(), Length(max=256)])
-    hcat = StringField('Horas Catedra', validators=[Length(max=20)])
-    hreloj = StringField('Horas Reloj', validators=[Length(max=20)])
-    especialidad = IntegerField('Especialidad')
-    submit = SubmitField('Guardar')
+    hcat = StringField('Horas Catedra', validators=[Length(max=4)])
+    hreloj = StringField('Horas Reloj', validators=[Length(max=4)])
+    especialidad = HiddenField('Especialidad')
+    submit = SubmitField('Guardar', render_kw={"class":"btn btn-primary"})

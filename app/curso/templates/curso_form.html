@@ -12,71 +12,71 @@
     <form action="" method="post" enctype="multipart/form-data" novalidate>
         {{ form.hidden_tag() }}
         <div>
-            {{ form.numero.label }}
-            {{ form.numero(size=5) }}<br>
+            {{ form.numero.label(class_="form-label") }}
+            {{ form.numero(size=5, class_="form-control") }}<br>
             {% for error in form.numero.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.especialidad.label }}
-            {{ form.especialidad }}<br>
+            {{ form.especialidad.label(class_="form-label") }}
+            {{ form.especialidad(class_="form-control") }}<br>
             {% for error in form.especialidad.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.content.label }}
-            {{ form.content }}<br>
+            {{ form.content.label(class_="form-label") }}
+            {{ form.content(class_="form-control") }}<br>
             {% for error in form.content.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.turno.label }}
-            {{ form.turno }}<br>
+            {{ form.turno.label(class_="form-label") }}
+            {{ form.turno(class="form-check") }}<br>
             {% for error in form.turno.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.lunes.label }}
-            {{ form.lunes(size=20) }}<br>
+            {{ form.lunes.label(class_="form-label") }}
+            {{ form.lunes(size=20, class_="form-control") }}<br>
             {% for error in form.lunes.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.martes.label }}
-            {{ form.martes(size=20) }}<br>
+            {{ form.martes.label(class_="form-label") }}
+            {{ form.martes(size=20, class_="form-control") }}<br>
             {% for error in form.martes.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.miercoles.label }}
-            {{ form.miercoles(size=20) }}<br>
+            {{ form.miercoles.label(class_="form-label") }}
+            {{ form.miercoles(size=20, class_="form-control") }}<br>
             {% for error in form.miercoles.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.jueves.label }}
-            {{ form.jueves(size=20) }}<br>
+            {{ form.jueves.label(class_="form-label") }}
+            {{ form.jueves(size=20, class_="form-control") }}<br>
             {% for error in form.jueves.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.viernes.label }}
-            {{ form.viernes(size=20) }}<br>
+            {{ form.viernes.label(class_="form-label") }}
+            {{ form.viernes(size=20, class_="form-control") }}<br>
             {% for error in form.viernes.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>
         <div>
-            {{ form.post_image.label }}
-            {{ form.post_image }}<br>
+            {{ form.post_image.label(class_="form-label") }}
+            {{ form.post_image(class_="form-control") }}<br>
             {% for error in form.post_image.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}

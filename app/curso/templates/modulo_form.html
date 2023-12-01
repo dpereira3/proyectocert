@@ -1,0 +1,59 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}
+    {% if form.nombre.data %}
+        {{ form.nombre.data }}
+    {% else %}
+        Nuevo Modulo
+    {% endif %}
+{% endblock %}
+
+{% block curso %}
+        <form action="" method="post" enctype="multipart/form-data" novalidate>
+            {{ form.csrf_token }}
+            {% if modulo %}
+                {{ form.especialidad(value=modulo.especialidad_id) }}
+            {% else %}
+                {{ form.especialidad(value=especialidad.id) }}
+            {% endif %}
+                <div>
+                    {{ form.codigo.label(class_="form-label") }}
+                    {{ form.codigo(class_="form-control") }}<br>
+                    {% for error in form.codigo.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.nombre.label(class_="form-label") }}
+                    {{ form.nombre(class_="form-control") }}<br>
+                    {% for error in form.nombre.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.hcat.label(class_="form-label") }}
+                    {{ form.hcat(class_="form-control") }}<br>
+                    {% for error in form.hcat.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.hreloj.label(class_="form-label") }}
+                    {{ form.hreloj(class_="form-control") }}<br>
+                    {% for error in form.hreloj.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.submit() }}
+                </div>
+            </form>
+            <br>
+            {% if modulo %}
+            <div class="col-1">
+                <form action="{{ url_for('curso.delete_modulo', modulo_id=modulo.id, especialidad_id=modulo.especialidad_id) }}" method="post" novalidate>
+                    <input type="submit" class="btn btn-primary mb-3" value="Eliminar" />
+                </form>
+            </div>
+            {% endif %}
+{% endblock %}

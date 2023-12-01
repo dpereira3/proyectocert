@@ -16,7 +16,7 @@
         {{ form.hidden_tag() }}
         <div>
             {{ form.is_admin.label }}
-            {{ form.is_admin }}<br>
+            {{ form.is_admin(class_="form-control") }}<br>
             {% for error in form.is_admin.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
