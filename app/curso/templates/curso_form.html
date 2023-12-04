@@ -85,9 +85,10 @@
             {{ form.submit() }}
         </div>
     </form>
+    <br>
     {% if post %}
     <form action="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" method="post" novalidate>
-        <input type="submit" value="Eliminar" />
+        <input class="btn btn-primary" type="submit" value="Eliminar" />
     </form>
     {% endif %}
 {% endblock %}

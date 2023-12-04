@@ -13,7 +13,7 @@
         {{ form.hidden_tag() }}
         <div>
             {{ form.title.label }}
-            {{ form.title(size=128)(class_="form-control") }}<br>
+            {{ form.title(size=128, class_="form-control") }}<br>
             {% for error in form.title.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
@@ -36,9 +36,10 @@
             {{ form.submit() }}
         </div>
     </form>
+    <br>
     {% if post %}
     <form action="{{ url_for('admin.delete_post', post_id=post.id) }}" method="post" novalidate>
-        <input type="submit" value="Eliminar" />
+        <input class="btn btn-primary" type="submit" value="Eliminar" />
     </form>
     {% endif %}
 {% endblock %}
