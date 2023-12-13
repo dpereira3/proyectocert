@@ -68,6 +68,9 @@ def curso_form():
         numero = form.numero.data
         especialidad = form.especialidad.data
         content = form.content.data
+        ciclo = form.ciclo.data
+        fecha_inicio = form.fecha_inicio.data
+        fecha_fin = form.fecha_fin.data
         turno = form.turno.data
         lunes = form.lunes.data
         martes = form.martes.data
@@ -83,7 +86,7 @@ def curso_form():
             os.makedirs(images_dir, exist_ok=True)
             file_path = os.path.join(images_dir, image_name)
             file.save(file_path)
-        curso = Curso(numero=numero, especialidad=especialidad, content=content, turno=turno, lunes=lunes, martes=martes, miercoles=miercoles,jueves=jueves, viernes=viernes)
+        curso = Curso(numero=numero, especialidad=especialidad, content=content, turno=turno, ciclo=ciclo, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, lunes=lunes, martes=martes, miercoles=miercoles,jueves=jueves, viernes=viernes)
         curso.image_name = image_name
         curso.save()
         logger.info(f'Guardando nuevo curso {especialidad}')
@@ -110,6 +113,9 @@ def update_curso_form(curso_id):
         curso.especialidad = form.especialidad.data
         curso.content = form.content.data
         curso.turno = form.turno.data
+        curso.ciclo = form.ciclo.data
+        curso.fecha_inicio = form.fecha_inicio.data
+        curso.fecha_fin = form.fecha_fin.data
         curso.lunes = form.lunes.data
         curso.martes = form.martes.data
         curso.miercoles = form.miercoles.data
